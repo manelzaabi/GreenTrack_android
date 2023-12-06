@@ -1,10 +1,11 @@
 package tn.esprit.event_pdm
 
 
-import tn.esprit.event_pdm.models.Events
+import tn.esprit.event_pdm.models.EventItem
+
 
 
 interface EventClickListener
 {
-    fun onClick(event: Events)
+    fun onClick(event: EventItem)
 }
