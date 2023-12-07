@@ -14,6 +14,11 @@ object RetrofitClient {
     }
 
     fun getEventService(): EventService {
-        return getRetrofitInstance().create(EventService::class.java)
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        return retrofit.create(EventService::class.java)
     }
 }

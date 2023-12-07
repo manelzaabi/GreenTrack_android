@@ -26,6 +26,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="313dp"
         android:layout_height="390dp"
+        tools:listitem="@layout/card_cell"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@id/addEventButton"
         app:layout_constraintEnd_toEndOf="parent"
