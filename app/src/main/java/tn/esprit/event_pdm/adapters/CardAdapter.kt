@@ -28,9 +28,12 @@ class CardAdapter(
           return CardViewHolder(binding, clickListener)
       }
 
-      override fun onBindViewHolder(holder: CardViewHolder, position: Int)
-      {
-          holder.bindEvent(events[position])
+      override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
+          val event = events[position]
+          // Utilisez les détails de l'événement pour configurer votre ViewHolder
+          holder.bindEvent(event)
+          holder.itemView.setOnClickListener { clickListener.onClick(event) }
+
       }
 
       override fun getItemCount(): Int = events.size

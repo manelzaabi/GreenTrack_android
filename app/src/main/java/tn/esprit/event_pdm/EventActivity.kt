@@ -37,7 +37,10 @@ class EventActivity : AppCompatActivity(), EventClickListener {
             layoutManager = GridLayoutManager(applicationContext, 3)
             adapter = CardAdapter(eventList, eventActivity)
         }
-
+        eventViewModel.getEvents().observe(this, { events ->
+            val adapter = CardAdapter(events, this)
+            binding.recyclerView.adapter = adapter
+        })
         val addEventButton = binding.root.findViewById<Button>(R.id.addEventButton)
         addEventButton.setOnClickListener {
             val intent = Intent(applicationContext, Activity_Add::class.java)

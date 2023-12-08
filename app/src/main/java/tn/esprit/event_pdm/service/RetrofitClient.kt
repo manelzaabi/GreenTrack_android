@@ -13,12 +13,12 @@ object RetrofitClient {
             .build()
     }
 
-    fun getEventService(): EventService {
+    fun getEventService(): EventApiService {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        return retrofit.create(EventService::class.java)
+        return retrofit.create(EventApiService::class.java)
     }
 }

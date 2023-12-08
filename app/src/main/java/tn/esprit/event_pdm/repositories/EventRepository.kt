@@ -6,15 +6,18 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import tn.esprit.event_pdm.models.EventItem
-import tn.esprit.event_pdm.service.EventService
+import tn.esprit.event_pdm.models.Mydata
+import tn.esprit.event_pdm.service.EventApiService
 
 
-class EventRepository(private val eventService: EventService) {
-    fun getAllEvents(): LiveData<List<EventItem>> {
-        val data = MutableLiveData<List<EventItem>>()
+class EventRepository(private val eventApiService: EventApiService) {
 
-        eventService.getEvents().enqueue(object : Callback<List<EventItem>> {
-            override fun onResponse(call: Call<List<EventItem>>, response: Response<List<EventItem>>) {
+
+    fun getAllEvents(): LiveData<List<Mydata>> {
+        val data = MutableLiveData<List<Mydata>>()
+
+        eventApiService.getEvents().enqueue(object : Callback<List<Mydata>> {
+            override fun onResponse(call: Call<List<Mydata>>, response: Response<List<Mydata>>) {
                 if (response.isSuccessful) {
                     data.value = response.body()
                 } else {
@@ -23,7 +26,7 @@ class EventRepository(private val eventService: EventService) {
                 }
             }
 
-            override fun onFailure(call: Call<List<EventItem>>, t: Throwable) {
+            override fun onFailure(call: Call<List<Mydata>>, t: Throwable) {
                 // Handle failure
                 Log.e("EventRepository", "Network error: ${t.message}")
             }
@@ -36,7 +39,7 @@ class EventRepository(private val eventService: EventService) {
     fun addEvent(event: EventItem): LiveData<Boolean> {
         val result = MutableLiveData<Boolean>()
 
-        eventService.addEvent(event).enqueue(object : Callback<EventItem> {
+        eventApiService.addEvent(event).enqueue(object : Callback<EventItem> {
             override fun onResponse(call: Call<EventItem>, response: Response<EventItem>) {
                 result.value = response.isSuccessful
             }
@@ -51,19 +54,5 @@ class EventRepository(private val eventService: EventService) {
     }
 
 
-    fun updateEvent(eventId: String, updatedEvent: EventItem): LiveData<Boolean> {
-        val result = MutableLiveData<Boolean>()
 
-
-        return result
-    }
-
-
-    fun deleteEvent(eventId: String): LiveData<Boolean> {
-        val result = MutableLiveData<Boolean>()
-
-
-
-        return result
-    }
 }
