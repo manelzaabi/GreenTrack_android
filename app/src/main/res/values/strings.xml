@@ -1,7 +1,17 @@
 <resources>
-    <string name="app_name">Event_PDM</string>
-    <string name="cover">Cover</string>
-    <string name="title_place_holder">title_place_holder</string>
-    <string name="author_placeholder">author_placeholder</string>
-    <string name="date">date</string>
+    <string name="app_name">calcul empreint carbone</string>
+
+    <string name="transport">Transport</string>
+    <string name="domestic">Domestic</string>
+    <string name="waste">Waste</string>
+
+    <string name="gas">Gas consumption (m³) :</string>
+    <string name="electrique">Consumption of electricity (kWh) :</string>
+
+    <string name="about"><b>CALCUL EMPREINT CARBONE</b>\n\nDécouvrez notre application mobile tout-en-un qui simplifie le calcul de votre empreinte carbone. Que ce soit pour évaluer l\'impact environnemental de vos déplacements, mesurer la gestion de vos déchets ou comprendre les aspects domestiques, notre application offre une solution complète.En quelques étapes simples, saisissez les détails de votre transport, de vos habitudes domestiques et de la gestion de vos déchets pour obtenir une évaluation précise de votre empreinte carbone. Suivez votre progression au fil du temps, recevez des conseils personnalisés et adoptez des choix plus écologiques. Faites partie du changement positif avec notre application, car chaque action compte pour un avenir durable.</string>
+    <string name="name_here">Name Here</string>
+    <string name="email_here">Email Here</string>
+    <string name="info">Info</string>
+
+
 </resources>

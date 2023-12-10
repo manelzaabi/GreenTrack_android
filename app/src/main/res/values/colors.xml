@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+
+    <color name="colorPrimary">#355E3B</color>
+    <color name="colorPrimaryDark">#00A36C</color>
+    <color name="colorPrimaryLight">#000000</color>
+
+    <color name="colorSecondary">#FFFFFF</color>
+    <color name="colorSecondaryDark">#FFFFFF</color>
+    <color name="colorSecondaryLight">#FFFFFF</color>
+
+    <color name="black">#00A36C</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="green">#70E000</color>
-    <color name="darkGray">#222</color>
 </resources>

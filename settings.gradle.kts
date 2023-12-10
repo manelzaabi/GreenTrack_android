@@ -13,6 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Event_PDM"
+rootProject.name = "Nascar"
 include(":app")
- 
