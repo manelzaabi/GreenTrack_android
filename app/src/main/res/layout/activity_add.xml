@@ -70,8 +70,9 @@
                 android:textSize="18sp"/>
         </RadioGroup>
 
+
         <EditText
-            android:id="@+id/usercomment"
+            android:id="@+id/detailsEvent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter More details.."

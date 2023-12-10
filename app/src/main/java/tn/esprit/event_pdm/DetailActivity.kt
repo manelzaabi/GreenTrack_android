@@ -16,6 +16,7 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var titleTextView: TextView
     private lateinit var dateTextView: TextView
     private lateinit var descriptionTextView: TextView
+    private lateinit var detailsTextView: TextView
     private lateinit var joinButton: Button
 
     val baseUrl = "http://192.168.1.199:8000"
@@ -29,6 +30,7 @@ class DetailActivity : AppCompatActivity() {
         titleTextView = findViewById(R.id.title)
         dateTextView = findViewById(R.id.date)
         descriptionTextView = findViewById(R.id.description)
+        detailsTextView = findViewById(R.id.details)
         joinButton = findViewById(R.id.button)
 
         val event = intent.getParcelableExtra<EventItem>(Event_ID_EXTRA)
@@ -41,6 +43,7 @@ class DetailActivity : AppCompatActivity() {
 
             dateTextView.text = it.date
             descriptionTextView.text = it.description
+            detailsTextView.text=it.details
 
         }
     }

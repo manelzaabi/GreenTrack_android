@@ -10,7 +10,7 @@ import tn.esprit.event_pdm.models.Events
 
 interface EventApiService {
     @GET("event")
-    fun getEvents(): Call<Events> // Modifier pour renvoyer Call<Events>
+    fun getEvents(): Call<Events>
 
     @POST("events")
     fun addEvent(@Body event: EventItem): Call<EventItem>

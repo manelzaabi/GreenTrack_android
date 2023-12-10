@@ -38,7 +38,7 @@ class EventActivity : AppCompatActivity(), EventClickListener {
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(applicationContext, 3)
 
-            // Adapter initialisé avec une liste vide (à remplacer par la vraie liste events)
+
             adapter = CardAdapter(listOf<EventItem>(),this@EventActivity)
         }
 
