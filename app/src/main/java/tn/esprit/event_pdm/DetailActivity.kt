@@ -18,6 +18,9 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var descriptionTextView: TextView
     private lateinit var joinButton: Button
 
+    val baseUrl = "http://192.168.1.199:8000"
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -28,12 +31,12 @@ class DetailActivity : AppCompatActivity() {
         descriptionTextView = findViewById(R.id.description)
         joinButton = findViewById(R.id.button)
 
-        val eventID = intent.getStringExtra(Event_ID_EXTRA)
+        val event = intent.getParcelableExtra<EventItem>(Event_ID_EXTRA)
 
-        val event = getEventFromDatabase(eventID)
 
         event?.let {
-            Picasso.get().load(it.image).into(coverImageView)
+            val imagePath = baseUrl+it.image
+            Picasso.get().load(imagePath).resize(800,600).centerCrop().into(coverImageView)
             titleTextView.text = it.title
 
             dateTextView.text = it.date

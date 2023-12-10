@@ -5,15 +5,14 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import tn.esprit.event_pdm.models.EventItem
-import tn.esprit.event_pdm.models.Mydata
+import tn.esprit.event_pdm.models.Events
 
 
 interface EventApiService {
     @GET("event")
-    fun getEvents(): Call<List<Mydata>>
+    fun getEvents(): Call<Events> // Modifier pour renvoyer Call<Events>
 
     @POST("events")
     fun addEvent(@Body event: EventItem): Call<EventItem>
-
-
 }
+
