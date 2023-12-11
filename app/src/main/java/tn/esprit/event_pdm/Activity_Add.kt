@@ -1,13 +1,17 @@
 package tn.esprit.event_pdm
 
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import android.widget.DatePicker
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import tn.esprit.event_pdm.models.EventItem
+import tn.esprit.event_pdm.repositories.EventRepository
 import tn.esprit.event_pdm.service.RetrofitClient
 import java.util.UUID
 
@@ -18,7 +22,7 @@ class Activity_Add : AppCompatActivity() {
 
     private lateinit var titletxt: EditText
     private lateinit var desctxt: EditText
-    private lateinit var loctxt : EditText
+    private lateinit var loctxt: EditText
     private lateinit var detailsEvent: EditText
     private lateinit var SubmitSave: Button
     private lateinit var Freebtn: RadioButton
@@ -29,6 +33,12 @@ class Activity_Add : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
+
+
+        val eventService = RetrofitClient.eventService
+        val repository = EventRepository(eventService)
+
+
 
 
         titletxt = findViewById(R.id.titletxt)
@@ -52,7 +62,8 @@ class Activity_Add : AppCompatActivity() {
             val selectedDate = "$day/$month/$year"
 
             if (title.isEmpty() || description.isEmpty() || location.isEmpty() || details.isEmpty()) {
-                Toast.makeText(this@Activity_Add, "Please fill all fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@Activity_Add, "Please fill all fields", Toast.LENGTH_SHORT)
+                    .show()
             } else {
                 val eventItem = EventItem(
                     date = selectedDate,
@@ -66,20 +77,50 @@ class Activity_Add : AppCompatActivity() {
                     title = title
                 )
 
+                repository.addEvent(eventItem).observe(this) { it ->
 
-                RetrofitClient.eventService.addEvent(eventItem).enqueue(object : Callback<EventItem> {
-                    override fun onResponse(call: Call<EventItem>, response: Response<EventItem>) {
-                        if (response.isSuccessful) {
-                            Toast.makeText(this@Activity_Add, "Event added successfully", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(this@Activity_Add, "Failed to add event", Toast.LENGTH_SHORT).show()
-                        }
+                    if (it) {
+                        Toast.makeText(
+                            this@Activity_Add,
+                            "Event added successfully",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            this@Activity_Add,
+                            "Failed to add event",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
-                    override fun onFailure(call: Call<EventItem>, t: Throwable) {
-                        Toast.makeText(this@Activity_Add, "Failed: " + t.message, Toast.LENGTH_SHORT).show()
-                    }
-                })
-            }}}}
+                }
+
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_PERMISSION)
+        } else {
+
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            REQUEST_PERMISSION -> if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+            }
+        }
+    }
+
+    companion object {
+        const val REQUEST_PERMISSION = 23
+    }
+
+}
 
 

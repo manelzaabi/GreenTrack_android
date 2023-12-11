@@ -16,10 +16,11 @@ import tn.esprit.event_pdm.models.eventList
 import tn.esprit.event_pdm.repositories.EventRepository
 import tn.esprit.event_pdm.service.RetrofitClient
 import tn.esprit.event_pdm.viewmodels.EventViewModel
+
 class EventActivity : AppCompatActivity(), EventClickListener {
     private lateinit var binding: ActivityEventBinding
     private lateinit var eventViewModel: EventViewModel
-    private lateinit var events: Events // Déclaration de la variable events
+    private lateinit var events: Events
     private lateinit var cardAdapter: CardAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,11 +36,11 @@ class EventActivity : AppCompatActivity(), EventClickListener {
         val factory = EventViewModelFactory(repository)
         eventViewModel = ViewModelProvider(this, factory).get(EventViewModel::class.java)
 
-        binding.recyclerView.apply {
+        val apply = binding.recyclerView.apply {
             layoutManager = GridLayoutManager(applicationContext, 3)
 
 
-            adapter = CardAdapter(listOf<EventItem>(),this@EventActivity)
+            adapter = CardAdapter(listOf<EventItem>(), this@EventActivity)
         }
 
         eventViewModel.getEvents().observe(this, { events ->
@@ -53,8 +54,10 @@ class EventActivity : AppCompatActivity(), EventClickListener {
             startActivity(intent)
         }
     }
+
     override fun onClick(events: EventItem) {
-        val recyclerView = binding.recyclerView // Obtenez la référence de votre RecyclerView depuis votre binding
+        val recyclerView =
+            binding.recyclerView
         val layoutManager = recyclerView.layoutManager as? GridLayoutManager
         val position = layoutManager?.findFirstVisibleItemPosition() ?: 0
 
