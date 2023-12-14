@@ -4,14 +4,12 @@ package com.example.videos.view
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.MediaController
 import android.widget.Toast
 import android.widget.VideoView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.videos.R
-import com.example.videos.RetrofitClient
 import com.example.videos.api.ApiResponse
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -20,6 +18,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import tn.esprit.event_pdm.RetrofitClient
 import java.io.FileNotFoundException
 import java.io.InputStream
 
