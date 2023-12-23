@@ -12,7 +12,7 @@ class CardViewHolder(
 ) : RecyclerView.ViewHolder(cardCellBinding.root)
 {
 
-    val baseUrl = "http://192.168.1.199:8000"
+    val baseUrl = "http://172.20.10.5:8000"
     fun bindEvent(events: EventItem) {
     val imagePath = baseUrl+events.image
         Picasso.get().load(imagePath).resize(800,600).centerCrop().into(cardCellBinding.image)

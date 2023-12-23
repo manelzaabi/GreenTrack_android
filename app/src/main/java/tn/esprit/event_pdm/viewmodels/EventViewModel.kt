@@ -1,5 +1,7 @@
 package tn.esprit.event_pdm.viewmodels
 
+import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import tn.esprit.event_pdm.models.EventItem
@@ -12,8 +14,8 @@ class EventViewModel(private val repository: EventRepository) : ViewModel() {
         return repository.getAllEvents()
     }
 
-    fun addEvent(event: EventItem): LiveData<Boolean> {
-        return repository.addEvent(event)
+    fun addEvent(event: EventItem, uri: Uri, context:Context): LiveData<Boolean> {
+        return repository.addEvent(event,uri,context)
     }
 }
 

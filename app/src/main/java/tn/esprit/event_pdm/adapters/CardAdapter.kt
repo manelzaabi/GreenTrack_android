@@ -12,11 +12,10 @@ import tn.esprit.event_pdm.models.Events
 
 class CardAdapter(
 
-    private var events: List<EventItem>, // Utilisation de l'objet Events au lieu de List<EventItem>
+    private var events: List<EventItem>,
     private val clickListener: EventClickListener
 ) : RecyclerView.Adapter<CardViewHolder>() {
 
-    // Mettre à jour les événements dans l'adaptateur
     fun updateEvents(newEvents: List<EventItem>) {
         events = newEvents
         notifyDataSetChanged()
@@ -31,11 +30,11 @@ class CardAdapter(
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         val event = events[position]
         holder.bindEvent(event)
-        holder.itemView.setOnClickListener { clickListener.onClick(event) } // Passer la liste d'événements
+        holder.itemView.setOnClickListener { clickListener.onClick(event) }
     }
 
 
-    override fun getItemCount(): Int = events.size // Utilisation de la taille de la liste d'événements dans l'objet Events
+    override fun getItemCount(): Int = events.size
 }
 
 

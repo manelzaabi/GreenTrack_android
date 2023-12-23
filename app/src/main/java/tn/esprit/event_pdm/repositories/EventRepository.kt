@@ -1,5 +1,10 @@
 package tn.esprit.event_pdm.repositories
+import android.content.ContentResolver
+import android.content.Context
+import android.net.Uri
 import android.util.Log
+import androidx.core.content.ContextCompat
+import androidx.core.net.toFile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import okhttp3.MediaType
@@ -13,6 +18,7 @@ import tn.esprit.event_pdm.models.Events
 import tn.esprit.event_pdm.service.EventApiService
 import tn.esprit.event_pdm.toRequestBody
 import java.io.File
+import java.io.FileOutputStream
 
 
 class EventRepository(private val eventApiService: EventApiService) {
@@ -40,11 +46,14 @@ class EventRepository(private val eventApiService: EventApiService) {
         return data
     }
 
-    fun addEvent(event: EventItem): LiveData<Boolean> {
+    fun addEvent(event: EventItem, imageUri: Uri, context:Context): LiveData<Boolean> {
         val result = MutableLiveData<Boolean>()
 
         val requestBody = HashMap<String, RequestBody>()
         val textMediaType = MediaType.parse("text/plain")
+
+
+
 
 
         requestBody["date"] = event.date.toRequestBody(textMediaType)
@@ -54,9 +63,15 @@ class EventRepository(private val eventApiService: EventApiService) {
         requestBody["location"] = event.location.toRequestBody(textMediaType)
         requestBody["isFree"] = event.isFree.toString().toRequestBody(textMediaType)
 
-        val file: File = File("image-1700598973149-918941309.png")
 
-        file.createNewFile();
+        val filesDir =  context.applicationContext.filesDir
+        val file = File(filesDir,"image.png")
+        val inputStream = context.contentResolver.openInputStream(imageUri)
+        val outputStream = FileOutputStream(file)
+
+        inputStream!!.copyTo(outputStream)
+
+
 
         val fileBody = RequestBody.create(MediaType.parse("image/*"), file)
         val imagePart =

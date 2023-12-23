@@ -4,4 +4,7 @@
     <string name="title_place_holder">title_place_holder</string>
     <string name="desc_placeholder">description</string>
     <string name="date">date</string>
+    <string name="loc">location</string>
+    <string name="free">free</string>
+
 </resources>

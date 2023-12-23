@@ -60,11 +60,10 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-livedata-core-ktx:2.6.2")
     implementation ("androidx.fragment:fragment-ktx:1.6.2")
 
-    //Stripe
-    implementation ("com.stripe:stripeterminal:3.2.0")
-    implementation("com.stripe:stripe-java:22.31.0")
-    implementation("org.slf4j:slf4j-simple:2.0.7")
-    implementation("io.javalin:javalin:5.6.2")
+    implementation ("com.stripe:stripe-android:20.35.2")
+
+
+
 
 
 }

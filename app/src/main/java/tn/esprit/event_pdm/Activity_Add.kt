@@ -1,10 +1,14 @@
 package tn.esprit.event_pdm
 
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import android.widget.DatePicker
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import retrofit2.Call
@@ -28,8 +32,23 @@ class Activity_Add : AppCompatActivity() {
     private lateinit var Freebtn: RadioButton
     private lateinit var Paidbtn: RadioButton
     private lateinit var datePicker: DatePicker
+    private lateinit var imagePicker : Button
+    private lateinit var imageView: ImageView
 
+    private var selectedImageUri : Uri? = null
 
+    val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        // Callback is invoked after the user selects a media item or closes the
+        // photo picker.
+        if (uri != null) {
+            Log.d("PhotoPicker", "Selected URI: $uri")
+            selectedImageUri = uri
+            imageView.setImageURI(uri)
+
+        } else {
+            Log.d("PhotoPicker", "No media selected")
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
@@ -49,6 +68,16 @@ class Activity_Add : AppCompatActivity() {
         Paidbtn = findViewById(R.id.paid)
         datePicker = findViewById(R.id.datePicker)
         SubmitSave = findViewById(R.id.btnSubmit)
+        imageView = findViewById(R.id.imageView)
+
+        imagePicker = findViewById(R.id.imagePicker)
+
+        imagePicker.setOnClickListener {
+            // Registers a photo picker activity launcher in single-select mode.
+
+            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+
+        }
 
         SubmitSave.setOnClickListener {
             val title = titletxt.text.toString()
@@ -61,7 +90,7 @@ class Activity_Add : AppCompatActivity() {
 
             val selectedDate = "$day/$month/$year"
 
-            if (title.isEmpty() || description.isEmpty() || location.isEmpty() || details.isEmpty()) {
+            if (title.isEmpty() || selectedImageUri == null || description.isEmpty() || location.isEmpty() || details.isEmpty()) {
                 Toast.makeText(this@Activity_Add, "Please fill all fields", Toast.LENGTH_SHORT)
                     .show()
             } else {
@@ -77,7 +106,7 @@ class Activity_Add : AppCompatActivity() {
                     title = title
                 )
 
-                repository.addEvent(eventItem).observe(this) { it ->
+                repository.addEvent(eventItem,selectedImageUri!!,this).observe(this) { it ->
 
                     if (it) {
                         Toast.makeText(

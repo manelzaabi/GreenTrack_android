@@ -26,10 +26,21 @@
         android:textSize="24sp"
         android:textStyle="bold" />
     <TextView
+        android:id="@+id/free"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/free"
+        android:textSize="15sp"
+        android:textColor="@color/green"
+         />
+    <TextView
         android:id="@+id/dateLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title"
+        android:layout_below="@id/free"
         android:layout_centerHorizontal="true"
         android:text="Programmed for :"
         android:textSize="16sp"
@@ -42,17 +53,40 @@
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title"
+        android:layout_below="@id/free"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
         android:text="@string/date"
         android:textSize="16sp"
         android:textColor="@android:color/darker_gray" />
     <TextView
-        android:id="@+id/descLabel"
+        android:id="@+id/locLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/date"
+        android:layout_centerHorizontal="true"
+        android:text="Location :"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        />
+
+    <TextView
+        android:id="@+id/loc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/date"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="@string/loc"
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray" />
+    <TextView
+        android:id="@+id/descLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loc"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:text="Description :"
