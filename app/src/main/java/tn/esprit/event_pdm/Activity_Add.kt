@@ -25,6 +25,7 @@ class Activity_Add : AppCompatActivity() {
     private var collector = ""
 
     private lateinit var titletxt: EditText
+    private lateinit var pricetxt: EditText
     private lateinit var desctxt: EditText
     private lateinit var loctxt: EditText
     private lateinit var detailsEvent: EditText
@@ -38,8 +39,6 @@ class Activity_Add : AppCompatActivity() {
     private var selectedImageUri : Uri? = null
 
     val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        // Callback is invoked after the user selects a media item or closes the
-        // photo picker.
         if (uri != null) {
             Log.d("PhotoPicker", "Selected URI: $uri")
             selectedImageUri = uri
@@ -61,6 +60,7 @@ class Activity_Add : AppCompatActivity() {
 
 
         titletxt = findViewById(R.id.titletxt)
+        pricetxt = findViewById(R.id.pricetxt)
         desctxt = findViewById(R.id.desctxt)
         loctxt = findViewById(R.id.loctxt)
         detailsEvent = findViewById(R.id.detailsEvent)
@@ -73,7 +73,6 @@ class Activity_Add : AppCompatActivity() {
         imagePicker = findViewById(R.id.imagePicker)
 
         imagePicker.setOnClickListener {
-            // Registers a photo picker activity launcher in single-select mode.
 
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
 
@@ -87,8 +86,18 @@ class Activity_Add : AppCompatActivity() {
             val day = datePicker.dayOfMonth
             val month = datePicker.month + 1
             val year = datePicker.year
-
+            val price = pricetxt.text.toString()
             val selectedDate = "$day/$month/$year"
+
+            /*val isPaid = Paidbtn.isChecked
+
+            val price = if (isPaid) {
+                pricetxt.text.toString().takeIf { it.isNotBlank() } ?: "0"
+            } else {
+                null
+            }*/
+
+
 
             if (title.isEmpty() || selectedImageUri == null || description.isEmpty() || location.isEmpty() || details.isEmpty()) {
                 Toast.makeText(this@Activity_Add, "Please fill all fields", Toast.LENGTH_SHORT)
@@ -102,7 +111,7 @@ class Activity_Add : AppCompatActivity() {
                     image = "image-1700598973149-918941309.png",
                     isFree = true,
                     location = location,
-                    price = "23",
+                    price = price,
                     title = title
                 )
 

@@ -28,7 +28,7 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var detailsTextView: TextView
     private lateinit var joinButton: Button
     private lateinit var locTV: TextView
-    val baseUrl = "http://172.20.10.5:8000"
+    val baseUrl = "http://192.168.1.34:8000"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
